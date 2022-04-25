@@ -1,0 +1,65 @@
+# dependencies
+node_modules/
+
+# production
+build/
+dist/
+dist-ssr/
+docs/
+
+# caches
+.changelog/
+.swc/
+.DS_Store
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# logs
+lerna-debug.log*
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv
+.env*
+!.env.example
+
+# git
+!.gitkeep
+
+# testing
+coverage/
+
+# python
+.ipynb_checkpoints/
+.mypy_cache/
+.pytest_cache/
+
+# binaries
+*.csv
+uploads/
+
+# secrets
+*.pem
+
+# prisma
+migrations/
+
+# next
+.next/
+.turbo
+out/
+
+# umi
+*.less.d.ts
+.umi/
+.umi-production/
+
+# miniprogram
+miniprogram_npm/
+project.private.config.json
+
+#docker
+volumes/
