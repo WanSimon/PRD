@@ -33,8 +33,8 @@ model User {
         createaAt       DateTime         @default(now()) //创建时间
         updateAt        DateTime         @updatedAt //更新时间
         articles        Article[] //关联文章
-        Comments        Comment[] //关联评论
         characteristics Characteristic[] //关联爱好
+        comment         Comment[]
 }
 
 //-----------------------------------Article文章信息--------------------------------

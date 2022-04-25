@@ -1,9 +1,10 @@
 import { Static, Type } from "@sinclair/typebox";
+import { UserGender, UserRole } from "@prisma/client";
 
-export const userSchema = {
+export const userSchema = Type.Object({
   id: Type.String({
     format: "uuid",
-    examples: ["a0b1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5"],
+    examples: ["550e8400-e29b-41d4-a716-446655440000"],
   }),
   avatar: Type.Optional(
     Type.String({
@@ -37,13 +38,36 @@ export const userSchema = {
   ),
   //TODO 枚举类型的实现Type.Enum
   gender: Type.Optional(
-    Type.String({
-      examples: "M",
+    Type.Enum(UserGender, {
+      examples: [UserGender.M],
     })
   ),
   role: Type.Optional(
-    Type.String({
-      examples: "boss",
+    Type.Enum(UserRole, {
+      examples: [UserRole.ADMIN],
     })
   ),
-};
+  characteristics: Type.Optional(
+    Type.Array(
+      Type.Object({
+        id: Type.String({
+          format: "uuid",
+          examples: ["550e8400-e29b-41d4-a716-446655440000"],
+        }),
+        content: Type.String({
+          examples: ["你做的饭饭真的很好吃"],
+        }),
+      })
+    )
+  ),
+  createdAt: Type.String({
+    format: "date-time",
+    examples: ["2020-01-01T00:00:00.000Z"],
+  }),
+  updatedAt: Type.String({
+    format: "date-time",
+    examples: ["2020-01-01T00:00:00.000Z"],
+  }),
+});
+
+export type User = Static<typeof userSchema>;
