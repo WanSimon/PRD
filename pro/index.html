@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <base href="http://www.example.com/page.html" />
+  </head>
+
+  <body>
+    <div id="d1">hello world</div>
+    <div id="divA">This is some text</div>
+    <div id="d3">hello</div>
+    <div id="d2">world</div>
+    <script>
+      //       let div = document.getElementById("d1");
+
+      //       console.log(div.firstChild.nodeValue);
+      //       document.getElementById("divA").textContent = "WanSimon Rock You";
+      //       console.log(document.getElementById("divA").textContent);
+
+      //       var div2 = document.getElementById("d2");
+      //       var div3 = document.getElementById("d3");
+      //       console.log(div3.nextSibling, "WanSimon");
+      //       console.log(document.baseURI);
+      //       var node = document.documentElement.firstChild.firstChild;
+      //       if (node.nodeType === Node.ELEMENT_NODE) {
+      //         console.log("该节点是元素节点", node.nodeName);
+      //       }
+      var arr = [1, 2, 3, [4, 5, 6], 7, 8, 9];
+      console.log(arr.shift(), "----", arr.unshift(90), arr.valueOf());
+
+      var arr = [0, 1, "a", false];
+
+      console.log(arr.filter(Boolean));
+    </script>
+  </body>
+</html>

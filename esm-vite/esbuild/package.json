@@ -1,0 +1,23 @@
+{
+  "name": "esbuild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "esbuild": "^0.14.34",
+    "js-tokens": "^4.0.0",
+    "scheduler": "^0.21.0",
+    "loose-envify": "^1.4.0",
+    "lodash-es": "^4.17.21",
+    "react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "esbuild-darwin-arm64": "^0.14.34"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild app.jsx --bundle --outfile=out.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
