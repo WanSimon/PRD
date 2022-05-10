@@ -26,12 +26,13 @@ model User {
         id              String           @id ///用户id
         email           String           @unique //邮箱
         role            UserRole         @default(USER) //用户角色
-        gender          Gender //性别
-        phone           String           @db.Char(11) // 手机号码
-        name            String           @db.VarChar(32) //姓名
-        password        String //登录密码
-        createaAt       DateTime         @default(now()) //创建时间
-        updateAt        DateTime         @updatedAt //更新时间
+        gender          Gender? //性别
+        birthday        DateTime?        @db.Date()
+        phone           String           @unique @db.VarChar(16) // 手机号码
+        name            String           @unique @db.VarChar(32) //姓名
+        password        String           @db.VarChar(32) //登录密码
+        createaAt       DateTime         @default(now()) @map("created_at") //创建时间
+        updateAt        DateTime         @updatedAt @map("updated_at") //更新时间
         articles        Article[] //关联文章
         characteristics Characteristic[] //关联爱好
         comment         Comment[]
@@ -39,16 +40,16 @@ model User {
 
 //-----------------------------------Article文章信息--------------------------------
 model Article {
-        id             String           @id //文章id
+        id             String           @id @default(uuid()) //文章id
         userId         String           @unique @map("user_id") //用户id
         like           Int              @default(0) //点赞数
         dislike        Int              @default(0) //踩数
         title          String           @db.VarChar(32) //文章标题
         content        Json?            @default("{}") //文章内容
         isDeleted      Boolean          @default(false) //   是否删除
-        createdAt      DateTime         @default(now()) //创建时间
-        updatedAt      DateTime         @updatedAt //更新时间
-        user           User             @relation(fields: [userId], references: [id]) //作者
+        createdAt      DateTime         @default(now()) @map("created_at") //创建时间
+        updatedAt      DateTime         @updatedAt @map("updated_at") //更新时间
+        author         User             @relation(fields: [userId], references: [id]) //作者
         comment        Comment[] //评论
         characteristic Characteristic[] //特征
 }
@@ -57,13 +58,13 @@ model Article {
 model Comment {
         id        String   @id @default(uuid()) //评论id
         articleId String   @map("article_id") //文章id
-        ownerId   String   @map("user_id") //用户id
+        ownerId   String   @map("owner_id") //用户id
         like      Int      @default(0) //点赞数
         dislike   Int      @default(0) //踩数
         content   Json?    @default("{}") //评论内容
-        isDeleted Boolean  @default(false) //是否删除
-        createdAt DateTime @default(now()) //创建时间
-        updatedAt DateTime @updatedAt //更新时间
+        isDeleted Boolean  @default(false) @map("is_deleted") //是否删除
+        createdAt DateTime @default(now()) @map("created_at") //创建时间
+        updatedAt DateTime @updatedAt @map("updated_at") //更新时间
         owner     User     @relation(fields: [ownerId], references: [id]) //评论者
         article   Article  @relation(fields: [articleId], references: [id]) //评论的文章
 }
@@ -75,13 +76,13 @@ enum Field {
 }
 
 model Characteristic {
-        id        String   @id //特点id
+        id        String   @id @default(uuid()) //特点id
         userId    String   @map("user_id") //用户id
         articleId String?  @map("article_id") //文章id
-        field     Field    @map("field") //特点类别
+        field     Field    @default(CATEGORY) @map("field") //特点类别
         content   String   @db.VarChar(32) //特点内容
-        createdAt DateTime @default(now()) //创建时间
-        updatedAt DateTime @updatedAt //更新时间
+        createdAt DateTime @default(now()) @map("created_at") //创建时间
+        updatedAt DateTime @updatedAt @map("updated_at") //更新时间
         user      User     @relation(fields: [userId], references: [id])
         article   Article? @relation(fields: [articleId], references: [id])
 }

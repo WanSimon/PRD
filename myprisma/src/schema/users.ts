@@ -1,5 +1,5 @@
 import { Static, Type } from "@sinclair/typebox";
-import { UserGender, UserRole } from "@prisma/client";
+import { Gender, UserRole } from "@prisma/client";
 
 export const userSchema = Type.Object({
   id: Type.String({
@@ -38,8 +38,8 @@ export const userSchema = Type.Object({
   ),
   //TODO 枚举类型的实现Type.Enum
   gender: Type.Optional(
-    Type.Enum(UserGender, {
-      examples: [UserGender.M],
+    Type.Enum(Gender, {
+      examples: [Gender.M],
     })
   ),
   role: Type.Optional(
@@ -70,4 +70,15 @@ export const userSchema = Type.Object({
   }),
 });
 
+export const userEllipse = Type.Object({
+  name: Type.String({
+    examples: ["分一杯羹"],
+  }),
+  id: Type.String({
+    format: "uuid",
+    examples: ["550e8400-e29b-41d4-a716-446655440000"],
+  }),
+});
+
 export type User = Static<typeof userSchema>;
+export type UserEllipse = Static<typeof userEllipse>;
